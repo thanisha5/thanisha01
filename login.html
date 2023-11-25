@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Sign In</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="shortcut icon"
+      href="./Images/logo1.png"
+      type="image/x-icon"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link href="./static/style.css" rel="stylesheet" type="text/css" />
+    <script>
+      var emailError = false;
+      var passwordError = false;
+      var strongPass = new RegExp(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})"
+      );
+      const mailFormat =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      function DisplayResults(e) {
+          swal({
+            title: "Welcome back!",
+            text: "Let the binge watch begin!!",
+            type: "success",
+          });
+          setTimeout(function () {
+            document.location.href = "home.html";
+          }, 1500);
+        return false;
+      }
+
+      function change(e) {
+        var name = document.forms["regform"]["name"].value;
+        var error = document.getElementById("errormessage");
+        var email = document.forms["regform"]["email"].value;
+        var password = document.forms["regform"]["password"].value;
+        var confirmPassword = document.forms["regform"]["retypepassword"].value;
+        if (emailError == true) {
+          if (email.length > 0) {
+            emailError = false;
+            error.style.display = "none";
+          }
+        } else if (passwordError == true) {
+          if (password.length > 0) {
+            passwordError = true;
+            error.style.display = "none";
+          }
+        }
+      }
+    </script>
+
+    <style>
+      #scrollToTopButton:hover,
+      i:hover {
+        color:  rgb(115, 65, 203);
+        background-color: white;
+      }
+      h1 {
+        margin: auto;
+        width: max-content;
+        color: white;
+      }
+      span {
+        display: inline-block;
+      }
+      .img-logo {
+        height: 94px;
+        margin-left: 45px;
+      }
+      label {
+        font-weight: bold;
+        color: white;
+        font-size: 1.25em;
+      }
+      input {
+        width: 280px;
+        border: none;
+        border-radius: 5px;
+        padding: 8px;
+        outline: none;
+      }
+      input[type="submit"] {
+        width: 260px;
+        background-color:  rgb(115, 65, 203);
+        font-weight: bold;
+      }
+      input[type="submit"]:hover {
+        cursor: pointer;
+        border: 2px gray solid;
+        background-color: rgb(115, 65, 203);
+        transform: scale(0.95);
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.85)),
+          url("Images/background3.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .brand {
+        margin-bottom: 13px;
+        color:  rgb(115, 65, 203);
+        padding-top: 15px;
+      }
+      #errormessage {
+        display: flex;
+        justify-content: center;
+        border-radius: 12px;
+      }
+      p {
+        display: inline-flex;
+        font-size: 1em;
+        align-items: center;
+        background: rgb(115, 65, 203);
+        padding: 0.5em;
+        color: white;
+        font-family: sans-serif;
+      }
+      p svg {
+        width: 2em;
+        height: 2em;
+        margin-right: 0.5em;
+        fill: lightgreen;
+      }
+      .login {
+        margin: 0 auto;
+        width: 400px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 5px;
+        padding: 30px 70px 143px 70px;
+        margin-bottom: 12px;
+      }
+
+      .login h1 {
+        color: white;
+        padding-bottom: 10px;
+      }
+
+      .bottom {
+        background-color: rgba(0, 0, 0, 0.35);
+        color: #bdc7c9;
+      }
+
+      .bottom-width {
+        max-width: 1000px;
+        padding: 8px 20px;
+        margin: auto;
+      }
+
+      .bottom-flex {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 15px 0 0 0;
+        justify-content: center;
+      }
+
+      .bottom-flex li {
+        list-style: none;
+        margin: 0px 10px;
+      }
+      .bottom-flex li a {
+        font-size: 15px;
+      }
+      .list-bottom {
+        margin-top: 10px;
+      }
+
+      .link-bottom {
+        text-decoration: none;
+        color: #bdc7c9;
+        font-size: 0.8rem;
+      }
+
+      .link-bottom:hover {
+        text-decoration: underline;
+      }
+      .remember-flex {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 0.8rem;
+      }
+
+      .color_text {
+        color: #bdc7c9;
+      }
+
+      .color_link {
+        color: #bdc7c9;
+      }
+
+      .signup-link {
+        color: white;
+        margin-bottom: 25px;
+
+        text-decoration: none;
+      }
+
+      .signup-link:hover {
+        text-decoration: underline;
+      }
+
+      .face_icon {
+        color: #3b5998;
+        margin-right: 6px;
+        font-size: 20px;
+      }
+      .log_face {
+        text-decoration: none;
+        margin-left: 10px;
+        font-size: 0.8rem;
+      }
+      .login-face {
+        text-align: center;
+        vertical-align: middle;
+        color: #bdc7c9;
+      }
+      .new-members {
+        margin-bottom: 10px;
+        color: #bdc7c9;
+      }
+      .or {
+        margin-bottom: 5px;
+        text-align: center;
+        color: #bdc7c9;
+      }
+
+      .help a {
+        text-decoration: none;
+        padding-top: 10%;
+        margin-left: 64%;
+        text-align: right;
+      }
+      .help a:hover {
+        text-decoration: underline;
+      }
+
+      .protection {
+        font-size: 0.8rem;
+        color: #bdc7c9;
+      }
+
+      .protection a {
+        text-decoration: none;
+      }
+
+      .protection a:hover {
+        text-decoration: underline;
+      }
+
+      .tel-link {
+        text-decoration: none;
+        color: #e1e5ea;
+      }
+
+      .tel-link:hover {
+        text-decoration: underline;
+      }
+.select-language option {
+        padding-left: 10px;
+      }
+      .input-text {
+        margin-bottom: 20px;
+      }
+      .input-text input {
+        width: 100%;
+        height: 45px;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        outline: transparent;
+        text-indent: 8px;
+      }
+
+      .input-text input::-webkit-input-placeholder {
+        font-size: 1rem;
+        color: #bdc7c9;
+      }
+
+      .input-text input::-moz-placeholder {
+        font-size: 1rem;
+        color: #bdc7c9;
+        text-indent: 40px;
+      }
+      .learnmore a {
+        padding: 2px;
+        margin: 0px;
+      }
+      .signin-button {
+        margin-top: 20px;
+        padding: 13px;
+        border-radius: 5px;
+        background-color:  rgb(115, 65, 203);
+        color: white;
+        border: none;
+        font-weight: bold;
+        font-size: 1.05rem;
+        cursor: pointer;
+      }
+      .logo img {
+        position: relative;
+        top: 30px;
+        left: 10px;
+        width: 110px;
+        height: 90px;
+        padding: 3px;
+        margin: 0;
+        padding: 0;
+      }
+      .field-icon {
+        position: absolute;
+        margin-left: -30px;
+        margin-top: 15px;
+        color: white;
+      }
+      .field-icon:hover {
+        cursor: pointer;
+        background-color: transparent;
+      }
+      @media only screen and (max-width: 450px) {
+        .login {
+          width: 300px;
+          padding: 15px;
+        }
+      }
+      @media only screen and (max-width: 350px) {
+        .login {
+          width: 240px;
+          padding: 10px;
+        }
+        input[type="submit"] {
+          width: 220px;
+        }
+        
+        .help a {
+          margin-left: 60% !important;
+        }
+      }
+    </style>
+    <meta
+      name="google-signin-client_id"
+      content="556331998780-jhmmulhgm2s2fgrqqln50vmtp1fh41vc.apps.googleusercontent.com"
+    />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="logo">
+      <a href="home.html">
+        <img src="Images/logo1.png" class="img-logo" alt="Logo" />
+      </a>
+    </div>
+    <div class="login-div">
+      <form
+        class="login"
+        onsubmit="return DisplayResults()"
+        name="regform"
+        autocomplete="off"
+      >
+        <h1 class="sign">Sign In</h1>
+        <div id="errormessage"></div>
+        <span class="seperator"></span>
+
+        <div class="input-text">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            oninput="change()"
+          />
+        </div>
+        <div class="input-text">
+          <input
+            id="pass_signup"
+            type="password"
+            name="password"
+            placeholder="Password"
+            oninput="change()"
+          /><i
+            class="fa fa-fw fa-eye field-icon toggle-password"
+            id="togglePassword"
+          ></i>
+        </div>
+
+        <span class="seperator"></span>
+        <input class="signin-button" type="submit" value="Sign In" />
